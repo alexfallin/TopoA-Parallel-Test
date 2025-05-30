@@ -1210,8 +1210,8 @@ Results* compress(string filename, string arrayName, double epsilon_relative, do
     printf("contour time: %.4f\n", results->gtCtTime);
     printf("eb time: %.4f\n", results->errorBoundTime);
     printf("growth time: %.4f\n", results->growthTime);
-    printf("avg tighten time: %.4f\n", results->);
-    printf("write time: %.4f\n", results->);
+    printf("avg tighten time: %.4f\n", results->averageTightenTime);
+    printf("write time: %.4f\n", results->writeToFileTime);
 
     return results;
 

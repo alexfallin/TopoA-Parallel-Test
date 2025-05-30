@@ -820,7 +820,7 @@ Results* compressIterativeMT(string filename, string arrayName, double epsilon_r
     printf("base comp time: %.4f\n", results->baseTime);
     printf("contour time: %.4f\n", results->gtCtTime);
     printf("eb time: %.4f\n", results->errorBoundTime);
-    printf("write time: %.4f\n", results->);
+    printf("write time: %.4f\n", results->writeToFileTime);
 
     return results;
 
