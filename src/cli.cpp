@@ -4,6 +4,7 @@
 #include "decompressor.hpp"
 #include "evaluation.hpp"
 #include "results.hpp"
+#include "cputimer.h"
 
 #include <vector>
 #include <iostream>

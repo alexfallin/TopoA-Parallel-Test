@@ -29,12 +29,17 @@
 #include "results.hpp"
 #include "write_utils.hpp"
 #include "python_error.hpp"
+#include "cputimer.h"
 
 using namespace std;
 
 #include "stdlib.h"
 #include "stdio.h"
 #include "string.h"
+#include <vector>
+
+static vector <char*> names;
+static vector <double> times;
 
 template <typename T> 
 Results* compress(string filename, string arrayName, double epsilon_relative, double xi_relative, string outputFilename = "", string outputFolder = ".", string baseCompressor = "SZ3", double compressorParameter = 1, bool verbose = false, int logQuantizeMode = true, int initialPrecision = 0, string baseCompressorFolder = "../../base_compressors", int size_x = -1, int size_y = -1, int size_z = -1){
@@ -1181,10 +1186,10 @@ Results* compress(string filename, string arrayName, double epsilon_relative, do
         cout << "compressed file: " << outputFilename << endl;
     }
 
-    result = system(("rm " + outputFolder + "/intermediateData.dat" + systemSuffix).c_str());
-    result = system(("rm " + outputFolder + "/rawData.cmp" + systemSuffix).c_str());
-    result = system(("rm " + outputFolder + "/rawData.dat" + systemSuffix).c_str());
-    result = system(("rm " + outputFolder + "/values.bytes" + systemSuffix).c_str());
+    result = system(("rm -f " + outputFolder + "/intermediateData.dat" + systemSuffix).c_str());
+    result = system(("rm -f " + outputFolder + "/rawData.cmp" + systemSuffix).c_str());
+    result = system(("rm -f " + outputFolder + "/rawData.dat" + systemSuffix).c_str());
+    result = system(("rm -f " + outputFolder + "/values.bytes" + systemSuffix).c_str());
 
     auto endTime = std::chrono::high_resolution_clock::now();
     double totalTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
@@ -1192,7 +1197,6 @@ Results* compress(string filename, string arrayName, double epsilon_relative, do
 
     results->ratio = compressionRatio;
     results->totalTime = totalTime;
-
     results->baseTime = std::chrono::duration_cast<std::chrono::duration<double>>(baseCompressionSplit - startTime).count();
     results->gtCtTime = std::chrono::duration_cast<std::chrono::duration<double>>(contourTreeSplit - baseCompressionSplit).count();
     results->errorBoundTime = std::chrono::duration_cast<std::chrono::duration<double>>(errorBoundSplit - contourTreeSplit).count();
@@ -1202,6 +1206,12 @@ Results* compress(string filename, string arrayName, double epsilon_relative, do
     results->numFN = numFN;
     results->writeToFileTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - tightenSplit).count();
     results->numExpanded = numExpanded;
+    printf("base comp time: %.4f\n", results->baseTime);
+    printf("contour time: %.4f\n", results->gtCtTime);
+    printf("eb time: %.4f\n", results->errorBoundTime);
+    printf("growth time: %.4f\n", results->growthTime);
+    printf("avg tighten time: %.4f\n", results->);
+    printf("write time: %.4f\n", results->);
 
     return results;
 

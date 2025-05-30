@@ -29,6 +29,7 @@
 #include "results.hpp"
 #include "write_utils.hpp"
 #include "python_error.hpp"
+#include "cputimer.h"
 
 using namespace std;
 
@@ -396,6 +397,10 @@ Results* compressIterative(string filename, string arrayName, double epsilon_rel
     results->numFN = 0;
     results->writeToFileTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - tightenSplit).count();
     results->numExpanded = 0;
+    printf("base comp time: %.4f\n", results->baseTime);
+    printf("contour time: %.4f\n", results->gtCtTime);
+    printf("eb time: %.4f\n", results->errorBoundTime);
+    printf("write time: %.4f\n", results->);
 
     return results;
 

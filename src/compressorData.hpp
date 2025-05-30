@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scalarfield.hpp"
+#include "cputimer.h"
 
 #include <string>
 
