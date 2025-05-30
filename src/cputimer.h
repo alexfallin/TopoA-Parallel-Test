@@ -4,6 +4,7 @@
 
 #ifndef SRC__CPUTIMER_H_
 #define SRC__CPUTIMER_H_
+#include <sys/time.h>
 struct CPUTimer
 {
   timeval beg, end;
